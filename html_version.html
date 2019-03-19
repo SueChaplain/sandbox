@@ -1,0 +1,199 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+
+<body>
+<h1>Migrating to AdoptOpenJDK from Oracle Java</h1>
+
+<p>One of the most compelling reasons to migrate to an OpenJDK from the AdoptOpenJDK project is the change to Oracle's Java support policy: 
+
+<ul>
+<li>From January 2019, Oracle will no longer be providing free updates for commercial use of Oracle JDK 8.</li>
+<li>From March 2019, Oracle will no longer be providing free updates for commercial use of Oracle JDK 11.</li>
+</ul>
+
+If you wish to continue getting security and stability fixes from Oracle for either Oracle Java 8 or
+Oracle Java 11, you will need to obtain and pay for a subscription plan.</p>
+
+<p>OpenJDK builds from the AdoptOpenJDK project are a strong alternative with sponsorship, collaboration,
+and support from big names in the Java ecosystem, including Amazon, IBM, jClarity, Microsoft, Pivotal, Red Hat, 
+GoDaddy, and many more.</p>
+
+AdoptOpenJDK focuses on LTS releases (e.g. Java 8 and 11) and provides two VM options:
+
+<ul>
+<li>The HotSpot VM, from the <a href="https://openjdk.java.net/groups/hotspot/">OpenJDK Hotspot</a> project.
+<li>The OpenJ9 VM, from the <a href="https://www.eclipse.org/openj9/">Eclipse OpenJ9</a> project.
+</ul>
+
+<p><i>“AdoptOpenJDK's mission is to provide free binaries for the ecosystem as long as
+the OpenJDK and OpenJ9 upstream projects continue to be maintained.”
+</i></p>
+
+AdoptOpenJDK builds are provided with community support. For higher levels of assurance you
+can also purchase commercial support offerings. For more information, see <a href="https://adoptopenjdk.net/support.html">Support</a>.
+
+<h2>Which platforms are supported by AdoptOpenJDK?</h2>
+
+<p>AdoptOpenJDK supports the widest range of any OpenJDK provider, including the following major platforms:
+
+<ol>
+<li>Linux&reg; x86</li>
+<li>macOS&reg; (OSX)</li>
+<li>Windows&reg; x64</li>
+</ol>
+
+For a full list of supported platforms, see the <a href="https://adoptopenjdk.net/supported_platforms.html">AdoptOpenJDK Platform Support Matrix</a>.</p>
+
+<h2>How can I install AdoptOpenJDK?</h2>
+
+<p>Installation instructions for your operating system can be found on the <a href="https://adoptopenjdk.net/installation.html">AdoptOpenJDK Installation page</a>.
+Alternatively, you can pull an official <a href="https://hub.docker.com/u/adoptopenjdk">AdoptOpenJDK Docker image</a> for Linux builds, 
+or obtain <a href="https://github.com/AdoptOpenJDK/homebrew-openjdk">HomeBrew support</a> for macOS builds.</p>
+
+<p>The community project are working on native installers for various operating systems, including <i>.msi</i> for Windows, </i>.pkg/.dmg</i> for macOS,
+and <i>.rpm/.deb</i> for the relevant Linux distributions. </p>
+
+<h2>How does an Adopt OpenJDK differ from an Oracle JDK?</h2>
+
+<p>The following table illustrates the proprietary components that can be found in an Oracle JDK 8 and the alternative technologies that are either planned 
+or available to replace them. Click on the links to learn more.</p>
+<table>
+<thead>
+<tr>
+<th>Oracle JDK 8 proprietary component</th>
+<th>Alternative component</th>
+<th>OpenJDK 8</th>
+<th>OpenJDK 11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>webstart/browser plugin</td>
+<td><a href="#icedtea-web">IcedTea-Web</a></td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+</tr>
+<tr>
+<td>JavaFX</td>
+<td><a href="#openjfx">OpenJFX</a></td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (coming soon)</td>
+</tr>
+<tr>
+<td>T2K font rendering engine</td>
+<td><a href="#freetype-font-rendering-library">Freetype</a></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+</tr>
+<tr>
+<td>Monotype Lucida fonts</td>
+<td><a href="#relicensed-lucida-fonts">Relicensed Lucida fonts</a></td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+</tr>
+<tr>
+<td>Ductus 2D renderer</td>
+<td><a href="#pisces-and-marlin">Pisces/Marlin</a></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (Pisces)</td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (Marlin)</td>
+</tr>
+<tr>
+<td>Kodac Color Matching System (KCMS) library</td>
+<td><a href="#lcms">LCMS</a></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>Use <a href="#jmx">JMX</a> (or SNMP4J)</td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (not bundled)</td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (not bundled)</td>
+</tr>
+<tr>
+<td>sound drivers</td>
+<td>Use <a href="#windows-sound-drivers">Windows sound drivers</a></td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (not bundled)</td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span> (not bundled)</td>
+</tr>
+<tr>
+<td>Java Flight Recorder (JFR)</td>
+<td><a href="#java-flight-recorder">Java Flight Recorder</a></td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+<td><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+</tr>
+<tr>
+<td>Java Mission Control (JMC)</td>
+<td>Use <a href="#jdk-mission-control">JDK Mission Control</a></td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+<td><i class="fa fa-times" aria-hidden="true"></i><span class="sr-only">no</span> (coming soon)</td>
+</tr>
+</tbody>
+</table>
+
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Note:</span> JavaFX, JFR, and JMC were all contributed by Oracle to the OpenJDK project for releases after Java 8.
+
+<h3 id="icedtea-web">IcedTea-web</h3>
+
+<p>AdoptOpenJDK are working on a project to provide IcedTea-web as an open source replacement for Webstart and Java plugin technology. This feature
+will be available via an installer option in AdoptOpenJDK binaries.</p>
+
+<h3 id="openjfx">OpenJFX</h3>
+
+<p>Back in 2017, JavaFX was decoupled from the Oracle JDK and contributed to the OpenJDK community. The OpenJFX community is focused on OpenJFX 11+ and AdoptOpenJDK is working with the OpenJFX community to provide it via an installer option in AdoptOpenJDK binaries.</p>
+<i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Note:</span> OpenJFX 8 is no longer being actively maintained. If you need this capability, we recommend upgrading to OpenJFX 11.</p>
+
+<h3 id="freetype-font-rendering-library">Freetype font rendering library</h3>
+
+<p>OpenJDK uses the open source FreeType font rendering library instead of the proprietary T2K font library.</p>
+
+<h3 id="relicensed-lucida-fonts">Relicensed Lucida fonts</h3>
+
+<p>The Lucida fonts that are available in Oracle JDK 8 have a proprietary 3rd party license. AdoptOpenJDK intend to provide relicensed Lucida fonts. Work is ongoing to minimize any display issues when these fonts are rendered by Freetype and is expected to complete in 2Q 2019.</p>
+
+<h3 id="pisces-and-marlin">Pisces and Marlin</h3>
+
+<p>Oracle JDK 8 uses a proprietary 2D graphics renderer called Ductus, whereas OpenJDK uses an open-source renderer called Pisces. From OpenJDK 9,
+the Marlin renderer is in use. Work is planned at AdoptOpenJDK to either backport Marlin to OpenJDK 8 and/or minimize any display issues between the two. The outlook for completion is Q2 2019.</p>
+
+<h3 id="lcms">LCMS</h3>
+
+<p>OpenJDK uses the Little Color Matching System (LCMS) open source open source library instead of the proprietary Kodac CMS library.</p>
+
+<h3 id="jmx">JMX</h3>
+
+<p>The proprietary SNMP package shipped with Oracle JDK 8 is not present in OpenJDK. Use JMX as an alternative, or SNMP4J. These packages are
+not bundled with the AdoptOpenJDK binaries.</p>
+
+<h3 id="windows-sound-drivers">Windows sound drivers</h3>
+
+<p>Oracle JDK provides native sound drivers for Java 8 on Windows, which are not present in OpenJDK. Use the sound drivers that are available
+with Microsoft Windows instead.</p>
+
+<h3 id="java-flight-recorder">Java Flight Recorder</h3>
+
+<p>Java Flight Recorder (JFR) was decoupled from the Oracle JDK and contributed to the OpenJDK community. Work is underway to backport JFR from OpenJDK 11 to OpenJDK 8. When this work is complete, AdoptOpenJDK will include JFR in OpenJDK 8 binaries.</p>
+
+<h3 id="jdk-mission-control">JDK Mission Control</h3>
+
+<p>Java Mission Control (JMC) is being open sourced under the OpenJDK <a href="https://github.com/JDKMissionControl/jmc" target="_blank">JDK Mission Control project</a>. When
+available, JMC will be able to receive JFR events from OpenJDK 11 and eventually OpenJDK 8, when that backport is complete.</p>
+
+<h2>How does the OpenJ9 VM differ from the HotSpot VM?</h2>
+
+<p><a href="https://www.eclipse.org/openj9">Eclipse OpenJ9</a> is an alternative Java virtual machine that implements the <a href="https://docs.oracle.com/javase/specs/index.html">Java Virtual Machine Specification</a>.
+You can think of it as a drop in replacement for the HotSpot VM, which is part of the reference implementation. Most Java applications should run 
+on an OpenJDK that contains the OpenJ9 VM without changing anything. However, because it is an independent implementation there are some slight 
+differences. To learn about these differences, read <a href="https://www.eclipse.org/openj9/docs/openj9_newuser/">New to OpenJ9?</a>.</p>
+
+<h2>Where can I find additional resources?</h2>
+
+<p>Join the <a href="https://adoptopenjdk.net/slack.html">AdoptOpenJDK Community Slack</a> or start at the <a href="https://github.com/AdoptOpenJDK/TSC">
+Technical Steering Committee</a> documentation set.</p>
+
+
+
+
+</body>
+</html>
