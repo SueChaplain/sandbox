@@ -6,35 +6,18 @@
 <body>
 <h1>Migrating to AdoptOpenJDK from Oracle Java</h1>
 
-<p>One of the most compelling reasons to migrate to an OpenJDK from the AdoptOpenJDK project is the change to Oracle's Java support policy: 
+<p>If you are moving from an Oracle JDK to an OpenJDK from the AdoptOpenJDK project, you'll probably have a few
+key questions on your mind:
 
 <ul>
-<li>From January 2019, Oracle will no longer be providing free updates for commercial use of Oracle JDK 8.</li>
-<li>From March 2019, Oracle will no longer be providing free updates for commercial use of Oracle JDK 11.</li>
+<li><a href="#platforms">Which platforms are supported?</a></li>
+<li><a href="#install">How do I install an (Adopt)OpenJDK?</a></li>
+<li><a href="#oracle_diff">What's the difference between an Oracle JDK and an (Adopt)OpenJDK?</a></li>
+<li><a href="#vm_diff">What's the difference between an OpenJDK with HotSpot and an OpenJDK with OpenJ9?</a></li>
+<li><a href="#resources">Where can I find additional resources?</a></li>
 </ul>
-
-If you wish to continue getting security and stability fixes from Oracle for either Oracle Java 8 or
-Oracle Java 11, you will need to obtain and pay for a subscription plan.</p>
-
-<p>OpenJDK builds from the AdoptOpenJDK project are a strong alternative with sponsorship, collaboration,
-and support from big names in the Java ecosystem, including Amazon, IBM, jClarity, Microsoft, Pivotal, Red Hat, 
-GoDaddy, and many more.</p>
-
-AdoptOpenJDK focuses on LTS releases (e.g. Java 8 and 11) and provides two VM options:
-
-<ul>
-<li>The HotSpot VM, from the <a href="https://openjdk.java.net/groups/hotspot/">OpenJDK Hotspot</a> project.
-<li>The OpenJ9 VM, from the <a href="https://www.eclipse.org/openj9/">Eclipse OpenJ9</a> project.
-</ul>
-
-<p><i>“AdoptOpenJDK's mission is to provide free binaries for the ecosystem as long as
-the OpenJDK and OpenJ9 upstream projects continue to be maintained.”
-</i></p>
-
-AdoptOpenJDK builds are provided with community support. For higher levels of assurance you
-can also purchase commercial support offerings. For more information, see <a href="https://adoptopenjdk.net/support.html">Support</a>.
-
-<h2>Which platforms are supported by AdoptOpenJDK?</h2>
+ 
+<h2 id="platforms">Which platforms are supported by AdoptOpenJDK?</h2>
 
 <p>AdoptOpenJDK supports the widest range of any OpenJDK provider, including the following major platforms:
 
@@ -46,7 +29,7 @@ can also purchase commercial support offerings. For more information, see <a hre
 
 For a full list of supported platforms, see the <a href="https://adoptopenjdk.net/supported_platforms.html">AdoptOpenJDK Platform Support Matrix</a>.</p>
 
-<h2>How can I install AdoptOpenJDK?</h2>
+<h2 id="install">How do I install an (Adopt)OpenJDK?</h2>
 
 <p>Installation instructions for your operating system can be found on the <a href="https://adoptopenjdk.net/installation.html">AdoptOpenJDK Installation page</a>.
 Alternatively, you can pull an official <a href="https://hub.docker.com/u/adoptopenjdk">AdoptOpenJDK Docker image</a> for Linux builds, 
@@ -55,7 +38,7 @@ or obtain <a href="https://github.com/AdoptOpenJDK/homebrew-openjdk">HomeBrew su
 <p>The community project are working on native installers for various operating systems, including <i>.msi</i> for Windows, </i>.pkg/.dmg</i> for macOS,
 and <i>.rpm/.deb</i> for the relevant Linux distributions. </p>
 
-<h2>How does an Adopt OpenJDK differ from an Oracle JDK?</h2>
+<h2 id="oracle_diff">What's the difference between an Oracle JDK and an (Adopt)OpenJDK?</h2>
 
 <p>The following table illustrates the proprietary components that can be found in an Oracle JDK 8 and the alternative technologies that are either planned 
 or available to replace them. Click on the links to learn more.</p>
@@ -180,20 +163,24 @@ with Microsoft Windows instead.</p>
 <p>Java Mission Control (JMC) is being open sourced under the OpenJDK <a href="https://github.com/JDKMissionControl/jmc" target="_blank">JDK Mission Control project</a>. When
 available, JMC will be able to receive JFR events from OpenJDK 11 and eventually OpenJDK 8, when that backport is complete.</p>
 
-<h2>How does the OpenJ9 VM differ from the HotSpot VM?</h2>
+<h2 id="vm_diff">How does the OpenJ9 VM differ from the HotSpot VM?</h2>
 
 <p><a href="https://www.eclipse.org/openj9">Eclipse OpenJ9</a> is an alternative Java virtual machine that implements the <a href="https://docs.oracle.com/javase/specs/index.html">Java Virtual Machine Specification</a>.
 You can think of it as a drop in replacement for the HotSpot VM, which is part of the reference implementation. Most Java applications should run 
 on an OpenJDK that contains the OpenJ9 VM without changing anything. However, because it is an independent implementation there are some slight 
 differences. To learn about these differences, read <a href="https://www.eclipse.org/openj9/docs/openj9_newuser/">New to OpenJ9?</a>.</p>
 
-<h2>Where can I find additional resources?</h2>
+<h2 id="resources">Where can I find additional resources?</h2>
 
-<p>Join the <a href="https://adoptopenjdk.net/slack.html">AdoptOpenJDK Community Slack</a> or start at the <a href="https://github.com/AdoptOpenJDK/TSC">
-Technical Steering Committee</a> documentation set.</p>
+<ul>
+<li>Ask questions directly by joining the <a href="https://adoptopenjdk.net/slack.html">AdoptOpenJDK Community Slack</a> channel.</li>
+<li>To learn more about the AdoptOpenJDK project, including build and test infrastructure, read the <a href="https://github.com/AdoptOpenJDK/TSC">Technical Steering Committee</a> documentation.</li>
+<li>For HotSpot VM documentation, see the <a href="http://openjdk.java.net/groups/hotspot/docs/RuntimeOverview.html">HotSpot Runtime Overview</a>.</li>
+<li>For OpenJ9 VM documentation, see the <a href="https://www.eclipse.org/openj9/docs/">OpenJ9 user documentation</a>.</li>
+</ul>
 
 
 
 
 </body>
-</html>
+</html>>
